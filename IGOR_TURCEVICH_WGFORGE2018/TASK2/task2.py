@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import sys
 
+ERROR_CODE = 1
+
 
 def get_text_from_file(path):
     from inspect import getsourcefile
@@ -41,17 +43,26 @@ def get_ip_address_by_frequency(ip_addresses, frequency_number):
     return ip_addresses[-int(frequency_number)][0]
 
 
-def main():
-    if len(sys.argv) < 3:
-        print('Usage: program path_to_file frequency_number\n')
-        return 1
-    text = get_text_from_file(sys.argv[1])
+def task2(path_to_file, frequency):
+    text = get_text_from_file(path_to_file)
+    result = analyze_text(text, frequency)
+    print(result)
+
+
+def analyze_text(text, frequency):
     ip_addresses = get_ip_addresses_from_text(text)
     unique_ip_dict = get_unique_ip_dict(ip_addresses)
     sorted_unique_ip_dict = sort_ip_dict_by_count(unique_ip_dict)
     ip_address = get_ip_address_by_frequency(sorted_unique_ip_dict,
-                                             int(sys.argv[2]))
-    print(ip_address)
+                                             int(frequency))
+    return ip_address
+
+
+def main():
+    if len(sys.argv) < 3:
+        print('Usage: program path_to_file frequency_number')
+        sys.exit(ERROR_CODE)
+    task2(sys.argv[1], sys.argv[2])
 
 
 if __name__ == '__main__':

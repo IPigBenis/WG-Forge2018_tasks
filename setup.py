@@ -7,7 +7,7 @@ setup(
     package_data={'': ['wgforge.wargaming.com_access.log']},
     entry_points={
         'console_scripts': [
-            'task1 = IGOR_TURCEVICH_WGFORGE2018.TASK1.task1:main'
+            'task2 = IGOR_TURCEVICH_WGFORGE2018.TASK2.task2:main'
         ]
     },
     test_suite='tests'
